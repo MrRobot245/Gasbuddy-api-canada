@@ -25,7 +25,7 @@ function getRandomPlace(id,callback){
 				time=time.substring(0, time.length - 3);
 				let locationAddr=$(this).find('.visible-xs').prev().text();
 				// console.log(locationAddr);
-				gasArray.push(new Array(price,location,time,locationAddr));
+				gasArray.push({'price':price,'locaiton':location,'time':time,'addr':locationAddr});
 				// console.log(price);
 			}
 		});
