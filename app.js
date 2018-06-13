@@ -6,19 +6,9 @@ var app = express();
 const asyncHandler = require('express-async-handler')
 
 
-app.get('/location/:id', asyncHandler(async (req, res, next) => {
-	/*
-	if there is an error thrown in getUserFromDb, asyncMiddleware
-	will pass it to next() and express will handle the error;
-	*/
-	// const gasArray = await getRandomPlace("https://www.gasbuddy.com/GasPrices/Ontario/Aylmer")
-	// res.json(user);
-
-
-getRandomPlace(req.params.id, function(result) {
-		// console.log(result);
-			res.send(({"status": 200, "error": null, "response": result}));
-		// return result;
+app.get('/location/:town', asyncHandler(async (req, res, next) => {
+	getRandomPlace(req.params.town, function(result) {
+		res.send(({"status": 200, "error": null, "response": result}));
 	});
 	// next();
 }));
