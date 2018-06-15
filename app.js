@@ -2,7 +2,6 @@
 var express = require('express');
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-var fetch = require("node-fetch");
 var app = express();
 const asyncHandler = require('express-async-handler')
 
@@ -17,42 +16,6 @@ app.get('/location/:gps', asyncHandler(async (req, res, next) => {
 	});
 	// next();
 }));
-
-app.get('/netdata/:base/:cmd', asyncHandler(async (req, res, next) => {
-	if(req.params.cmd=='cpu'){
-
-		fetch("https://"+req.params.base+"/api/v1/allmetrics").then(function(response) {
-		  return response.text().then(function(text) {
-			  text=text.split("\n");
-			  var value=0;
-			  text.forEach(function(a){
-				  if (a.indexOf('NETDATA_SYSTEM_CPU_VISIBLETOTAL')>-1){
-					  // console.log(a);
-					   value=a.split("\"");
-					   value=value[1];
-				  }
-			  })
-			  res.send(({
-				  "status": 200,
-				  "error": null,
-				  "response": parseInt(value),
-			  }));
-			  // console.log(value);
-		  });
-		});
-	}
-	else{
-		res.send(({
-			"status": 200,
-			"error": null,
-			"response":'unknown command',
-		}));
-	}
-
-	// next();
-}));
-
-
 module.exports = app;
 
 
