@@ -35,7 +35,7 @@ app.get('/netdata/:base/:cmd', asyncHandler(async (req, res, next) => {
 			  res.send(({
 				  "status": 200,
 				  "error": null,
-				  "response": parseFloat(value/100),
+				  "response": parseInt(value),
 			  }));
 			  // console.log(value);
 		  });
